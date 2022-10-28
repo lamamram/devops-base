@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# $# : nombre de paramètres du script
+if [ "$#" -lt 2 ]; then
+  echo "this script needs two arguments: [gitlab domain name] & [network interface]"
+  exit 1
+fi
+
 # $1, $2 correspondent à la position des paramètres à l'appel
 check()
 {
@@ -59,5 +65,6 @@ apt-get update
 # 2. on va récupérer le mdp root de gitlab
 EXTERNAL_URL=$1 apt-get install gitlab-ee -y
 cat /etc/gitlab/initial_root_password
+# afficher l'interface enp0s8 | récupérer la regex inet IP | récupérer IP  
 ip a show dev $2 | grep -owP "inet (\d+\.){3}\d+" | cut -d ' ' -f2
 # gitlab-rake "gitlab:password:reset[root]"
