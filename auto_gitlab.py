@@ -7,7 +7,7 @@ import subprocess
 import sys, os
 
 GITLAB_USER = "root"
-GITLAB_TOKEN = "glpat-GVdzmFjnsRc-zX2yFVXK"
+GITLAB_TOKEN = "glpat-ByfkyUzj8W11dfamMgEV"
 GITLAB_HOST = "http://gitlab.formation.lan"
 GITLAB_PROJECT = "devops"
 

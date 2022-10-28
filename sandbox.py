@@ -77,4 +77,4 @@ with open("README.md", "a", encoding="utf8") as f:
 
 with open("README.md", "r", encoding="utf8") as f:
     print(f.read())
-# fichier fermé automatiquement à la fin du bloc with
+# fichier fermé automatiquement à la fin du bloc withà

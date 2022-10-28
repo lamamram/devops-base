@@ -27,6 +27,10 @@ Vagrant.configure(2) do |config|
       machine.vm.hostname = "#{vmname}"
       machine.vm.network "public_network"
       machine.ssh.insert_key = false
+      # exécution d'un script post création
+      machine.vm.provision "shell", 
+        path: "install_simple_gitlab.sh", 
+        args: ["http://gitlab.formation.lan", "enp0s8"]
     end
   end
 end
