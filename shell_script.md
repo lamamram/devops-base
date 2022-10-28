@@ -4,7 +4,7 @@
 
 > on peut convertir les saut de lignes CRLF \r\n de windows en LF \n sous linux
 
-> avec vim -c "ff=unix" -c ":wq" file_name
+> avec vim -c ":set ff=unix" -c ":wq" file_name
 
 1. n'installer les dépendances que si non encore installées
 
