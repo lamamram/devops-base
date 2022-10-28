@@ -50,3 +50,4 @@
 
   * envoi des commits sur la branche master du dépôt distant
     - `git push [nom du dépôt] master`
+    
