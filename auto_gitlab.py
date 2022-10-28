@@ -1,6 +1,7 @@
 # 1. créer une connexion à l'api GITLAB grâce au token
 # package python-gitlab : pip install --upgrade python-gitlab
 
+from re import search
 import gitlab
 
 GITLAB_USER = "root"
@@ -13,8 +14,10 @@ gl = gitlab.Gitlab(
     private_token=GITLAB_TOKEN
 )
 
-project = gl.projects.create({
-    'name': GITLAB_PROJECT,
-    "visibility": "private"
-})
-print(project.get_id())
+if not gl.projects.list(search=GITLAB_PROJECT):
+    project = gl.projects.create({
+        'name': GITLAB_PROJECT,
+        "visibility": "private"
+    })
+    print(f"projet {GITLAB_PROJECT} created !!")
+
