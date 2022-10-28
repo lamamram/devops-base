@@ -1,5 +1,11 @@
 # script d'installation de gitlab en bash
 
+> en cas d'édition dans windows d'un fichier exécuté sous linux
+
+> on peut convertir les saut de lignes CRLF \r\n de windows en LF \n sous linux
+
+> avec vim -c "ff=unix" -c ":wq" file_name
+
 1. n'installer les dépendances que si non encore installées
 
 2. détecter l'os ubuntu et la distrib focal
