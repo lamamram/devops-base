@@ -70,3 +70,11 @@ r = requests.get("https://dawan.fr")
 print(f"code de retour http: {r.status_code}")
 if 200 <= r.status_code < 300:
     print(r.text)
+
+# manipulation de fichiers: a => append : ajout à la fin
+with open("README.md", "a", encoding="utf8") as f:
+    f.write("\n\n* [rappels python](./sandbox.md)")
+
+with open("README.md", "r", encoding="utf8") as f:
+    print(f.read())
+# fichier fermé automatiquement à la fin du bloc with
