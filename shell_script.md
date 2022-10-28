@@ -16,3 +16,10 @@
   * placer les valeurs dans les variables os et dist
   * injecter ces variables dans l'url du dépôt
 
+3. protéger l'appel curl sur la chaine de caractère paramétrée du dépôt
+
+4. installer gitlab 
+   * en récupérant le mdp root 
+   * l'ip de la machine sur l'interface enp0s8
+   * lancer le script avec les paramètres "http://gitlab.formation.lan" et "enp0s8"
+

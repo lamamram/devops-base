@@ -57,7 +57,7 @@ apt-get update
 # le nom d'hôte du site
 # 1. il faut gérer un dns local dans windows 192.168.???.??? http://gitlab.formation.lan
 # 2. on va récupérer le mdp root de gitlab
-EXTERNAL_URL=http://gitlab.formation.lan apt-get install gitlab-ee -y
+EXTERNAL_URL=$1 apt-get install gitlab-ee -y
 cat /etc/gitlab/initial_root_password
-
+ip a show dev $2 | grep -owP "inet (\d+\.){3}\d+" | cut -d ' ' -f2
 # gitlab-rake "gitlab:password:reset[root]"
