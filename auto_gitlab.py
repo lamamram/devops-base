@@ -16,7 +16,7 @@ gl = gitlab.Gitlab(
     private_token=GITLAB_TOKEN
 )
 
-# création du projet
+# 2. création du projet
 if not gl.projects.list(search=GITLAB_PROJECT):
     project = gl.projects.create({
         'name': GITLAB_PROJECT,
@@ -26,7 +26,9 @@ if not gl.projects.list(search=GITLAB_PROJECT):
 
 
 ssh_path = f"c:/Users/{os.getlogin()}.DESKTOP-8967908/.ssh"
-# appel à ssh-keygen.exe à travers python (system call)
+
+## 3. création des clés
+#. appel à ssh-keygen.exe à travers python (system call)
 # 1. découpe de la commande dans une liste
 # 2. utilisation du paramètre input pour anticiper les demandes du script sur stdin
 # investiguer sous windows
@@ -35,3 +37,18 @@ ssh_path = f"c:/Users/{os.getlogin()}.DESKTOP-8967908/.ssh"
 if not os.path.exists(f"{ssh_path}/{GITLAB_PROJECT}"):
     subprocess.run(["ssh-keygen", "-f", f"{ssh_path}/{GITLAB_PROJECT}"], input=b'\r\n\r\n')
     print("pubkey/privkey generated !!")
+
+
+## 4. upload de la clé
+try:
+    # 1. authentification de l'utilisateur courant
+    gl.auth()
+    with open(f"{ssh_path}/{GITLAB_PROJECT}.pub") as f:
+        key = gl.user.keys.create({
+            'title': f'{GITLAB_USER}_ssh_key',
+            'key': f.read()
+        })
+except Exception as e:
+    # 2. si l'upload échoue, on sort du programme
+    print(e, type(e))
+    sys.exit(1)
