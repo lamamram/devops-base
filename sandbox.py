@@ -73,7 +73,7 @@ if 200 <= r.status_code < 300:
 
 # manipulation de fichiers: a => append : ajout à la fin
 with open("README.md", "a", encoding="utf8") as f:
-    f.write("\n\n* [rappels python](./sandbox.md)")
+    f.write("\n\n3. [rappels python](./sandbox.md)")
 
 with open("README.md", "r", encoding="utf8") as f:
     print(f.read())
