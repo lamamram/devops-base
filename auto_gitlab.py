@@ -43,7 +43,7 @@ if not os.path.exists(f"{ssh_path}/{GITLAB_PROJECT}"):
 try:
     # 1. authentification de l'utilisateur courant
     gl.auth()
-    with open(f"{ssh_path}/{GITLAB_PROJECT}.pub") as f:
+    with open(f"{ssh_path}/{GITLAB_PROJECT}.pub", "r") as f:
         key = gl.user.keys.create({
             'title': f'{GITLAB_USER}_ssh_key',
             'key': f.read()
@@ -52,3 +52,16 @@ except Exception as e:
     # 2. si l'upload échoue, on sort du programme
     print(e, type(e))
     sys.exit(1)
+
+# r+: lecture + écriture
+with open(f"{ssh_path}/config", "r+") as f:
+  # "slicing" de la chaine de caractère pour enelever http:// 
+  if f"Host {GITLAB_HOST[7:]}\n" not in f.readlines():
+    f.writelines([
+      f"\n\nHost {GITLAB_HOST[7:]}\n",
+      f" IdentityFile {ssh_path}/{GITLAB_PROJECT}\n",
+      f" UserKnownHostsFile /dev/null\n",
+      f" StrictHostKeyChecking no"
+    ])
+    print("- privkey config done !")
+
