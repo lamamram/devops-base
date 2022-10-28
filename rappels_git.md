@@ -23,3 +23,30 @@
     - **A**dded : ajouté à l'index
     - unmodified : dans le même état que dans le dernier commit contenant le fichier
     - **M**odified : modifié par rapport à la version du dépôt
+
+
+6. synchronisation de dépôts
+  * création de clés privée publique : 
+    - `ssh-keygen` dans git bash (pas de passphrase)
+    - renommer id_rsa(.pub) par devops(.pub)
+
+  * ajout de la clé publique dans les clés ssh de l'utilisateur gitlab
+    - copier le contenu de devops.pub
+    - préférences utilisateurs -> SSH Keys -> Add key
+
+  * configuration de la clé privée
+    - créer ou éditer le fichier **config** dans **~/.ssh**
+    - ajouter et adapter le bloc suivant
+
+    ```
+    Host gitlab.formation.lan
+     IdentityFile "/c/Users/[username]/.ssh/devops"
+     UserKnownHostsFile /dev/null
+     StrictHostKeyChecking no
+    ```
+
+  * ajout du dépôt distant dans le dépôt local
+    - `git remote add [nom du dépôt] [xxx@yyy.zz:path/to/repo.git]`
+
+  * envoi des commits sur la branche master du dépôt distant
+    - `git push [nom du dépôt] master`
