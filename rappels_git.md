@@ -15,3 +15,11 @@
 
 4. historique des commits
   * `git log -p -[num]`: historique eds num derniers commit avec les modifs
+
+5. état des fichiers dans git
+  * `git status`
+  * cycle d'un fichier dans git
+    - **U**ntracked : nouveau fichier inconnu de git
+    - **A**dded : ajouté à l'index
+    - unmodified : dans le même état que dans le dernier commit contenant le fichier
+    - **M**odified : modifié par rapport à la version du dépôt
