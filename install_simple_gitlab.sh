@@ -50,7 +50,14 @@ gpg_keyring_path="/usr/share/keyrings/gitlab_gitlab-ee-archive-keyring.gpg"
 curl -fsSL "$gpg_key_url" | gpg --dearmor > $gpg_keyring_path
 
 # recharger le cache apt pour tenir compte du nouveau dépôt
+# apt-cache search 'gitlab-*' pour vérifier la dispo de gitlab-ee
 apt-get update
 
-# EXTERNAL_URL=http://gitlab.formation.lan apt-get install gitlab-ee
+# EXTERNAL_URL va être utilisée par l'installeur gitlab pour constituer 
+# le nom d'hôte du site
+# 1. il faut gérer un dns local dans windows 192.168.???.??? http://gitlab.formation.lan
+# 2. on va récupérer le mdp root de gitlab
+EXTERNAL_URL=http://gitlab.formation.lan apt-get install gitlab-ee -y
+cat /etc/gitlab/initial_root_password
+
 # gitlab-rake "gitlab:password:reset[root]"
