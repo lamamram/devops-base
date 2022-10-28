@@ -26,6 +26,8 @@
 
 
 6. synchronisation de dépôts
+  * création d'un projet "devops" privé et vide dans gitlab
+  
   * création de clés privée publique : 
     - `ssh-keygen` dans git bash (pas de passphrase)
     - renommer id_rsa(.pub) par devops(.pub)
@@ -50,4 +52,4 @@
 
   * envoi des commits sur la branche master du dépôt distant
     - `git push [nom du dépôt] master`
-    
+
