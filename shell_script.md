@@ -23,3 +23,10 @@
    * l'ip de la machine sur l'interface enp0s8
    * lancer le script avec les paramètres "http://gitlab.formation.lan" et "enp0s8"
 
+5. récupérer l'ip et indiquer le dns dans c:\Windows\System32\drivers\etc\hosts
+```
+[votre IP] gitlab.formation.lan
+```
+
+6. se logger en root sur gitlab avec le mdp à la fin du script d'install
+
