@@ -51,7 +51,6 @@ try:
 except Exception as e:
     # 2. si l'upload échoue, on sort du programme
     print(e, type(e))
-    sys.exit(1)
 
 # r+: lecture + écriture
 with open(f"{ssh_path}/config", "r+") as f:
@@ -59,9 +58,18 @@ with open(f"{ssh_path}/config", "r+") as f:
   if f"Host {GITLAB_HOST[7:]}\n" not in f.readlines():
     f.writelines([
       f"\n\nHost {GITLAB_HOST[7:]}\n",
-      f" IdentityFile {ssh_path}/{GITLAB_PROJECT}\n",
+      f' IdentityFile "{ssh_path}/{GITLAB_PROJECT}"\n',
       f" UserKnownHostsFile /dev/null\n",
       f" StrictHostKeyChecking no"
     ])
     print("- privkey config done !")
 
+if not os.path.exists("./.git/refs/remotes/gitlab"):
+  subprocess.run(f"git remote add gitlab git@{GITLAB_HOST[7:]}:{GITLAB_USER}/{GITLAB_PROJECT}.git".split())
+  # création d'une modif
+  with open("README.md", "a") as f:
+    f.write("\n---\n> WELCOME on GITLAB !!\n")
+  subprocess.run("git add .".split())
+  subprocess.run("git commit -m 'README!'".split())
+  subprocess.run("git push -u gitlab HEAD".split())
+  print("- first push done !")
